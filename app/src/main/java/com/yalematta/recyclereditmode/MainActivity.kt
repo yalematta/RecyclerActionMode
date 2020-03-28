@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     var actionMode: ActionMode? = null
     var adapter: RecyclerAdapter? = null
-    private lateinit var recyclerList: List<RecyclerItem>
+    private lateinit var recyclerList: MutableList<Contact>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +34,12 @@ class MainActivity : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
     }
 
-    private fun generateDummyList(size: Int): List<RecyclerItem> {
-        val list = ArrayList<RecyclerItem>();
+    private fun generateDummyList(size: Int): MutableList<Contact> {
+        val list = ArrayList<Contact>();
 
         for (i in 0 until size) {
             val drawable = R.drawable.ic_account
-            val item = RecyclerItem(drawable, "Person $i", "Details")
+            val item = Contact(drawable, "Person $i", "Details")
             list += item
         }
 
