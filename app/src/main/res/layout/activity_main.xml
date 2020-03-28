@@ -12,6 +12,6 @@
         android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/recycler_item"/>
+        tools:listitem="@layout/contact_item"/>
 
 </RelativeLayout>

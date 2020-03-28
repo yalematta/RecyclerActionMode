@@ -1,3 +1,3 @@
 package com.yalematta.recyclereditmode
 
-data class Contact(val imageResource: Int, val title: String, val subTitle: String)
+data class Contact(val id: String, val imageResource: Int, val title: String, val subTitle: String)

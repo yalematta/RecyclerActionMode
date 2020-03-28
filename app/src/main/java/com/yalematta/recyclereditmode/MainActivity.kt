@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SelectionInterface {
 
     companion object {
         var TAG: String = MainActivity::class.java.simpleName
     }
 
     var actionMode: ActionMode? = null
-    var adapter: RecyclerAdapter? = null
+    var adapter: ContactAdapter? = null
     private lateinit var recyclerList: MutableList<Contact>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         title = getString(R.string.contacts)
 
         recyclerList = generateDummyList(100)
-        adapter = RecyclerAdapter(recyclerList)
+        adapter = ContactAdapter(this, recyclerList, this)
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         for (i in 0 until size) {
             val drawable = R.drawable.ic_account
-            val item = Contact(drawable, "Person $i", "Details")
+            val item = Contact(i.toString(), drawable, "Person $i", "Details")
             list += item
         }
 
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
             when (item?.itemId) {
                 R.id.delete -> {
-                    //adapter?.deleteSelectedIds()
+                    adapter?.deleteSelectedIds()
                     actionMode?.title = "" //remove item count from action mode.
                     actionMode?.finish()
                     return true
@@ -95,10 +95,16 @@ class MainActivity : AppCompatActivity() {
 
         override fun onDestroyActionMode(mode: ActionMode?) {
             Log.d(TAG, "onDestroyActionMode Called")
-            //adapter?.selectedIds?.clear()
+            adapter?.selectedIds?.clear()
             adapter?.notifyDataSetChanged()
             actionMode = null
         }
+    }
+
+    override fun setSelectedNumber(size: Int) {
+        if (actionMode == null) actionMode = startActionMode(ActionModeCallback())
+        if (size > 0) actionMode?.title = "$size Selected"
+        else actionMode?.finish()
     }
 
 }
