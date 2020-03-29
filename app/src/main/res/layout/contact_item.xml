@@ -12,11 +12,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <CheckBox
+            android:visibility="gone"
+            android:id="@+id/checkbox"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:buttonTint="@color/colorPrimary"/>
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@+id/checkbox"
             android:src="@drawable/ic_account"/>
 
         <TextView

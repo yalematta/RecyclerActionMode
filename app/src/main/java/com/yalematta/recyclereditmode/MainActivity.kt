@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), SelectionInterface {
 
         isMultiSelectionOn = false
 
-        recyclerList = generateDummyList(100)
+        recyclerList = generateDummyList(20)
         adapter = ContactAdapter(this, recyclerList, this)
 
         recyclerView.adapter = adapter
@@ -87,6 +87,7 @@ class MainActivity : AppCompatActivity(), SelectionInterface {
 
         override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
             isMultiSelectionOn = true
+            adapter?.notifyDataSetChanged()
             val inflater = mode?.menuInflater
             inflater?.inflate(R.menu.action_menu, menu)
             return true
@@ -109,7 +110,7 @@ class MainActivity : AppCompatActivity(), SelectionInterface {
     override fun setSelectedNumber(size: Int) {
         if (actionMode == null) actionMode = startActionMode(ActionModeCallback())
         if (size > 0) actionMode?.title = "$size Selected"
-        else actionMode?.finish()
+        else actionMode?.title = ""
     }
 
 }

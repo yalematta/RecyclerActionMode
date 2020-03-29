@@ -1,20 +1,19 @@
 package com.yalematta.recyclereditmode
 
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
 class ContactAdapter(
     private val context: Context,
     private val contactList: MutableList<Contact>,
-    private val selectionInterface: SelectionInterface
-) :
+    private val selectionInterface: SelectionInterface) :
     RecyclerView.Adapter<ContactViewHolder>(), ContactClickListener {
 
+    var onBind: Boolean = false
     val selectedIds: MutableList<String> = ArrayList<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
@@ -24,6 +23,7 @@ class ContactAdapter(
     }
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
+        onBind = true
         val currentItem = contactList[position]
         holder.imageView.setImageResource(currentItem.imageResource)
         holder.subTitleView.text = currentItem.subTitle
@@ -31,15 +31,13 @@ class ContactAdapter(
 
         val id = contactList[position].id
 
-        if (selectedIds.contains(id)) {
-            //if item is selected then,set foreground color of FrameLayout.
-            holder.titleView.foreground =
-                ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary))
-        } else {
-            //else remove selected item color.
-            holder.titleView.foreground =
-                ColorDrawable(ContextCompat.getColor(context, android.R.color.transparent))
-        }
+        if (MainActivity.isMultiSelectionOn)
+            holder.checkBox.visibility = View.VISIBLE
+        else
+            holder.checkBox.visibility = View.GONE
+
+        holder.checkBox.isChecked = selectedIds.contains(id)
+        onBind = false
     }
 
     override fun getItemCount(): Int = contactList.size
@@ -49,15 +47,22 @@ class ContactAdapter(
             addToSelectedIds(index)
     }
 
-    private fun addToSelectedIds(index: Int) {
-        val id = contactList[index].id
-        if (selectedIds.contains(id))
-            selectedIds.remove(id)
-        else
-            selectedIds.add(id)
+    override fun onCheckedChangedListener(index: Int, isChecked: Boolean) {
+        if (MainActivity.isMultiSelectionOn)
+            addToSelectedIds(index)
+    }
 
-        notifyItemChanged(index)
-        selectionInterface.setSelectedNumber(selectedIds.size)
+    private fun addToSelectedIds(index: Int) {
+        if (!onBind) {
+            val id = contactList[index].id
+            if (selectedIds.contains(id))
+                selectedIds.remove(id)
+            else
+                selectedIds.add(id)
+
+            notifyItemChanged(index)
+            selectionInterface.setSelectedNumber(selectedIds.size)
+        }
     }
 
     fun deleteSelectedIds() {
