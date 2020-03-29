@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    android:id="@+id/cardView"
+<androidx.cardview.widget.CardView android:id="@+id/cardView"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp">
+    android:layout_margin="4dp"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
         android:padding="8dp"
@@ -20,7 +20,7 @@
             android:src="@drawable/ic_account"/>
 
         <TextView
-            android:text="Title"
+            tools:text="Title"
             android:textSize="18sp"
             android:textStyle="bold"
             android:id="@+id/titleView"
@@ -30,7 +30,7 @@
             android:textColor="@android:color/black"/>
 
         <TextView
-            android:text="Subtitle"
+            tools:text="Subtitle"
             android:id="@+id/subTitleView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

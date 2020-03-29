@@ -14,6 +14,7 @@ import java.util.*
 class MainActivity : AppCompatActivity(), SelectionInterface {
 
     companion object {
+        var isMultiSelectionOn: Boolean = false
         var TAG: String = MainActivity::class.java.simpleName
     }
 
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity(), SelectionInterface {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         title = getString(R.string.contacts)
+
+        isMultiSelectionOn = false
 
         recyclerList = generateDummyList(100)
         adapter = ContactAdapter(this, recyclerList, this)
@@ -83,6 +86,7 @@ class MainActivity : AppCompatActivity(), SelectionInterface {
         }
 
         override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+            isMultiSelectionOn = true
             val inflater = mode?.menuInflater
             inflater?.inflate(R.menu.action_menu, menu)
             return true
@@ -97,6 +101,7 @@ class MainActivity : AppCompatActivity(), SelectionInterface {
             Log.d(TAG, "onDestroyActionMode Called")
             adapter?.selectedIds?.clear()
             adapter?.notifyDataSetChanged()
+            isMultiSelectionOn = false
             actionMode = null
         }
     }

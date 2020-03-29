@@ -11,13 +11,15 @@ import androidx.recyclerview.widget.RecyclerView
 class ContactAdapter(
     private val context: Context,
     private val contactList: MutableList<Contact>,
-    private val selectionInterface: SelectionInterface) :
+    private val selectionInterface: SelectionInterface
+) :
     RecyclerView.Adapter<ContactViewHolder>(), ContactClickListener {
 
     val selectedIds: MutableList<String> = ArrayList<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.contact_item, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.contact_item, parent, false)
         return ContactViewHolder(itemView, this)
     }
 
@@ -31,17 +33,20 @@ class ContactAdapter(
 
         if (selectedIds.contains(id)) {
             //if item is selected then,set foreground color of FrameLayout.
-            holder.titleView.foreground = ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary))
+            holder.titleView.foreground =
+                ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary))
         } else {
             //else remove selected item color.
-            holder.titleView.foreground = ColorDrawable(ContextCompat.getColor(context, android.R.color.transparent))
+            holder.titleView.foreground =
+                ColorDrawable(ContextCompat.getColor(context, android.R.color.transparent))
         }
     }
 
     override fun getItemCount(): Int = contactList.size
 
     override fun onClick(index: Int) {
-        addToSelectedIds(index)
+        if (MainActivity.isMultiSelectionOn)
+            addToSelectedIds(index)
     }
 
     private fun addToSelectedIds(index: Int) {
@@ -73,6 +78,8 @@ class ContactAdapter(
                 }
                 indexOfModelList++
             }
+
+            MainActivity.isMultiSelectionOn = false
         }
     }
 }
