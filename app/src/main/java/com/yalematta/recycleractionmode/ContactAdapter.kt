@@ -1,4 +1,4 @@
-package com.yalematta.recyclereditmode
+package com.yalematta.recycleractionmode
 
 import android.content.Context
 import android.util.Log

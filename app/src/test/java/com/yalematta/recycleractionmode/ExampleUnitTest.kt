@@ -1,4 +1,4 @@
-package com.yalematta.recyclereditmode
+package com.yalematta.recycleractionmode
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

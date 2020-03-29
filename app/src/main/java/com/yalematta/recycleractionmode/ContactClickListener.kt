@@ -1,4 +1,4 @@
-package com.yalematta.recyclereditmode
+package com.yalematta.recycleractionmode
 
 interface ContactClickListener {
     fun onClick(index : Int)

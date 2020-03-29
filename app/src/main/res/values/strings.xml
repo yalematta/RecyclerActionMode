@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RecyclerEditMode</string>
+    <string name="app_name">RecyclerActionMode</string>
     <string name="contacts">Contacts</string>
     <string name="edit_contacts">Edit Contacts</string>
     <string name="delete_contacts">Delete Contacts</string>

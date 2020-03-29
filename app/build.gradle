@@ -7,7 +7,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.yalematta.recyclereditmode"
+        applicationId "com.yalematta.recycleractionmode"
         minSdkVersion 23
         targetSdkVersion 28
         versionCode 1

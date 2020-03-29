@@ -1,4 +1,4 @@
-package com.yalematta.recyclereditmode
+package com.yalematta.recycleractionmode
 
 import android.view.View
 import android.widget.CheckBox
