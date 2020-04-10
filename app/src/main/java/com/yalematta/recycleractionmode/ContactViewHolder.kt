@@ -1,10 +1,7 @@
 package com.yalematta.recycleractionmode
 
 import android.view.View
-import android.widget.CheckBox
-import android.widget.CompoundButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.contact_item.view.*
@@ -13,22 +10,15 @@ class ContactViewHolder(itemView: View, private val listener: ContactClickListen
     RecyclerView.ViewHolder(itemView), View.OnClickListener,
     CompoundButton.OnCheckedChangeListener {
 
-    val cardView: CardView
-    val checkBox: CheckBox
-    val titleView: TextView
-    val imageView: ImageView
-    val subTitleView: TextView
+    val cardView: CardView = itemView.cardView
+    val checkBox: CheckBox = itemView.checkbox
+    val imageView: ImageView = itemView.imageView
+    val titleView: EditText = itemView.titleEditView
+    val subTitleView: TextView = itemView.subTitleView
 
     init {
-        cardView = itemView.cardView
-        checkBox = itemView.checkbox
-        titleView = itemView.titleView
-        imageView = itemView.imageView
-        subTitleView = itemView.subTitleView
-
         cardView.setOnClickListener(this)
         checkBox.setOnCheckedChangeListener(this)
-
     }
 
     override fun onClick(v: View?) {

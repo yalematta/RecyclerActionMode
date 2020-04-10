@@ -27,7 +27,7 @@ class ContactAdapter(
         val currentItem = contactList[position]
         holder.imageView.setImageResource(currentItem.imageResource)
         holder.subTitleView.text = currentItem.subTitle
-        holder.titleView.text = currentItem.title
+        holder.titleView.hint = currentItem.title
 
         val id = contactList[position].id
 

@@ -27,11 +27,11 @@
             android:layout_toEndOf="@+id/checkbox"
             android:src="@drawable/ic_account"/>
 
-        <TextView
+        <EditText
             tools:text="Title"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:id="@+id/titleView"
+            android:id="@+id/titleEditView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/imageView"
@@ -42,7 +42,7 @@
             android:id="@+id/subTitleView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/titleView"
+            android:layout_below="@+id/titleEditView"
             android:layout_toEndOf="@+id/imageView" />
 
     </RelativeLayout>
